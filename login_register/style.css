@@ -162,6 +162,7 @@ input[type="checkbox"] {
   color: #fff;
   transition: all 0.5s;
 }
+
 .register,
 .inputForm_pass--pass,
 .inputForm_text--pass,
