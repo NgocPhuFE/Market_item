@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="icon" href="/img/icontitle.png" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="cricle--left"></div>
+    <div class="cricle--right"></div>
+    <div class="container">
+      <form>
+        <div class="nameForm">
+          <div class="login">Login</div>
+          <div class="register">Register</div>
+        </div>
+        <div class="inputForm_text">
+          <div class="inputForm_text--login">
+            <input
+              type="text"
+              name="username"
+              class="inputText"
+              placeholder=" "
+            />
+            <label>UserName</label>
+          </div>
+          <div class="inputForm_text--pass">
+            <input
+              type="text"
+              name="username"
+              class="inputText"
+              placeholder=" "
+            />
+            <label>UserName</label>
+          </div>
+        </div>
+        <div class="inputForm_pass">
+          <div class="inputForm_pass--login">
+            <input type="password" class="inputPass" placeholder=" " />
+            <label for="">Password</label>
+            <i class="fa-solid fa-eye-slash" id="eye-login"></i>
+          </div>
+          <div class="inputForm_pass--pass">
+            <input type="password" class="inputPass" placeholder=" " />
+            <label for="">Password</label>
+            <i class="fa-solid fa-eye-slash" id="eye-register"></i>
+          </div>
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" class="checkboxLogin" />
+          <label for="" class="checkboxLoginlabel">Save me</label>
+          <input type="checkbox" class="checkboxPass" />
+          <label for="" class="checkboxPasslabel">I accept the terms</label>
+        </div>
+        <div class="btnSubmit">
+          <button class="submitLogin">Submit</button>
+          <button class="submitRegister">Submit</button>
+        </div>
+        <div class="btnForm">
+          <button id="login" class="active-btnForm">Login</button>
+          <button id="register">Register</button>
+          <div class="background-btnForm"></div>
+        </div>
+      </form>
+      <div class="toastMessage"></div>
+    </div>
+  </body>
+  <script src="./main.js"></script>
+</html>
