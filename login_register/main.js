@@ -1,5 +1,9 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
+const load = $(".load");
+window.onload = () => {
+  load.remove();
+};
 const bg_btnForm = $(".background-btnForm");
 const Users = [
   {
@@ -100,6 +104,9 @@ function checkValueInput() {
           "fa-check"
         );
         SuccessToast.render();
+        setTimeout(() => {
+          window.location = "/pageMarket.html";
+        }, 800);
       } else if (
         inputTextLogin.value !== e.userName &&
         inputpassLogin.value !== e.password
@@ -138,13 +145,13 @@ function checkPass() {
 }
 
 class toastMessage {
-  constructor(status, content, statusColor, backgroundIcon, borderLeft, icon) {
-    this.status = status;
-    this.content = content;
-    this.statusColor = statusColor;
-    this.backgroundIcon = backgroundIcon;
-    this.borderLeft = borderLeft;
-    this.icon = icon;
+  constructor(...rest) {
+    this.status = rest[0];
+    this.content = rest[1];
+    this.statusColor = rest[2];
+    this.backgroundIcon = rest[3];
+    this.borderLeft = rest[4];
+    this.icon = rest[5];
   }
   render = () => {
     const toast = [
