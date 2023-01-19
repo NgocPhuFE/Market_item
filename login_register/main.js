@@ -105,7 +105,7 @@ function checkValueInput() {
         );
         SuccessToast.render();
         setTimeout(() => {
-          window.location = "/pageMarket.html";
+          window.location = "/login_register/pageMarket.html";
         }, 800);
       } else if (
         inputTextLogin.value !== e.userName &&
