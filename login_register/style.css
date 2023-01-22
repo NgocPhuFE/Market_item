@@ -165,7 +165,7 @@ input[type="checkbox"] {
   z-index: -12;
   height: 100%;
   position: absolute;
-  left: 0;
+  left: 46px;
   transition: all 0.5s;
 }
 .active-btnForm {
@@ -237,13 +237,6 @@ input[type="checkbox"] {
   color: #ff1e00;
 }
 
-.toast--btnClose i {
-  color: #fff;
-  padding: 2.5px 5px;
-  background-color: #80808055;
-  border-radius: 50%;
-  cursor: pointer;
-}
 .load {
   position: absolute;
   top: 0;

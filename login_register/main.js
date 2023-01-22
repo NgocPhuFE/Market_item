@@ -18,8 +18,6 @@ const Users = [
   },
 ];
 function start() {
-  bg_btnForm.style.left = $("#login").offsetLeft + "px";
-  bg_btnForm.style.width = $("#login").offsetWidth + "px";
   btnForm();
   checkValueInput();
   checkPass();
@@ -45,6 +43,7 @@ function btnForm() {
       e.preventDefault();
       bg_btnForm.style.left = e.target.offsetLeft + "px";
       bg_btnForm.style.width = e.target.offsetWidth + "px";
+      console.log(e.target.offsetLeft);
       $("button.active-btnForm").classList.remove("active-btnForm");
       e.target.classList.add("active-btnForm");
       if ($("#register.active-btnForm")) {
@@ -90,15 +89,14 @@ function checkValueInput() {
   const inputpassLogin = $(".inputForm_pass--login input");
   $(".submitLogin").onclick = (e) => {
     e.preventDefault();
-    Users.forEach((e) => {
+    Users.forEach((ev) => {
       if (
-        inputTextLogin.value === e.userName &&
-        inputpassLogin.value === e.password
+        inputTextLogin.value === ev.userName &&
+        inputpassLogin.value === ev.password
       ) {
         const SuccessToast = new toastMessage(
           "Successful Login",
           "succesColor",
-          "#54b435",
           "&#128521"
         );
         SuccessToast.render();
@@ -107,13 +105,12 @@ function checkValueInput() {
             "/Market_item/login_register/pageMarket/pageMarket.html";
         }, 800);
       } else if (
-        inputTextLogin.value !== e.userName &&
-        inputpassLogin.value !== e.password
+        inputTextLogin.value !== ev.userName &&
+        inputpassLogin.value !== ev.password
       ) {
         const ErrorToast = new toastMessage(
           "Error Login",
           "ErrorColor",
-          "#ff1e00",
           "&#128517"
         );
         ErrorToast.render();
@@ -145,8 +142,7 @@ class toastMessage {
   constructor(...rest) {
     this.status = rest[0];
     this.statusColor = rest[1];
-    this.borderLeft = rest[2];
-    this.icon = rest[3];
+    this.icon = rest[2];
   }
   render = () => {
     const toast = [
@@ -157,7 +153,6 @@ class toastMessage {
   <div class="toast--text">
     <div class="toast--text_status ${this.statusColor}">${this.status}</div>
   </div>
-
   `,
     ].join("");
     let divToast = document.createElement("div");
