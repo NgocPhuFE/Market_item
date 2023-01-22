@@ -11,11 +11,6 @@ const Users = [
     userName: "tranngocphuwr",
     password: "123456",
   },
-  {
-    id: 2,
-    userName: "0766586738",
-    password: "123456",
-  },
 ];
 function start() {
   btnForm();
