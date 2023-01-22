@@ -96,12 +96,10 @@ function checkValueInput() {
         inputpassLogin.value === e.password
       ) {
         const SuccessToast = new toastMessage(
-          "Successful Login !",
-          "Welcome back my friend",
+          "Successful Login",
           "succesColor",
-          "#379237",
           "#54b435",
-          "fa-check"
+          "&#128521"
         );
         SuccessToast.render();
         setTimeout(() => {
@@ -113,12 +111,10 @@ function checkValueInput() {
         inputpassLogin.value !== e.password
       ) {
         const ErrorToast = new toastMessage(
-          "Error Login !",
-          "Check your password and user name",
+          "Error Login",
           "ErrorColor",
-          "#C21010",
           "#ff1e00",
-          "fa-xmark"
+          "&#128517"
         );
         ErrorToast.render();
       }
@@ -148,21 +144,18 @@ function checkPass() {
 class toastMessage {
   constructor(...rest) {
     this.status = rest[0];
-    this.content = rest[1];
-    this.statusColor = rest[2];
-    this.backgroundIcon = rest[3];
-    this.borderLeft = rest[4];
-    this.icon = rest[5];
+    this.statusColor = rest[1];
+    this.borderLeft = rest[2];
+    this.icon = rest[3];
   }
   render = () => {
     const toast = [
       `  
   <div class="toast--icon">
-    <i class="fa-solid ${this.icon}"></i>
+  <span>${this.icon}</span>
   </div>
   <div class="toast--text">
     <div class="toast--text_status ${this.statusColor}">${this.status}</div>
-    <div class="toast--text_content">${this.content}</div>
   </div>
 
   `,
@@ -173,11 +166,6 @@ class toastMessage {
     const toastMessage = $(".toastMessage");
     toastMessage.appendChild(divToast);
     $(".toast").style.display = "flex";
-    $(".toast").style.borderLeft = `5px solid ${this.borderLeft}`;
-    $(".toast--icon i").style.background = `${this.backgroundIcon}`;
-    if (this.icon === "fa-xmark") {
-      $(".toast--icon i").style.padding = "10px 14px";
-    }
     setTimeout(() => {
       divToast.style.animation = "toastHid 0.3s linear forwards";
     }, 2000);

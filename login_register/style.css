@@ -1,12 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 body {
   width: 100%;
   height: 100vh;
   background-image: linear-gradient(160deg, #d7e9b9, #fffbac);
   overflow: hidden;
   background-repeat: no-repeat;
-  font-family: system-ui;
+  font-family: "Press Start 2P", cursive;
+  margin: 0;
+  padding: 0;
 }
-.cricle--left {
+/* .cricle--left {
   position: absolute;
   width: 300px;
   height: 300px;
@@ -25,7 +28,7 @@ body {
   border-radius: 50%;
   top: -10%;
   animation: animationCricleRight 7s ease-in-out infinite alternate;
-}
+} */
 
 .container {
   width: 100%;
@@ -33,6 +36,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: url(./background.png);
+  background-size: cover;
 }
 form {
   width: 350px;
@@ -50,16 +55,18 @@ form::before {
   content: "";
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(to top, #d7e9b9, #faab78);
+  background-image: url(./background.png);
+  background-size: cover;
   position: absolute;
+  background-position: 100% 50%;
   z-index: -12;
   border-radius: 0% 100% 0% 100% / 100% 64% 36% 0%;
   bottom: -10%;
 }
 .nameForm {
   padding: 0 10%;
-  margin: 40px 0;
-  font-size: 250%;
+  margin: 50px 0;
+  font-size: 200%;
   font-weight: bold;
   color: #fff;
 }
@@ -87,6 +94,7 @@ form::before {
   background-color: #ffffff55;
   border: none;
   font-weight: bold;
+  font-family: "Press Start 2P", cursive;
 }
 .inputForm_pass {
   margin-top: 10%;
@@ -121,7 +129,7 @@ input[type="checkbox"] {
   width: 80%;
   font-weight: bold;
   border: none;
-  background-image: linear-gradient(to bottom left, #faab78, #ffd495);
+  background-image: linear-gradient(to top left, #ef8dfd, #9561fe);
   box-shadow: 0 0 5px #808080;
   border-radius: 5px;
   cursor: pointer;
@@ -129,6 +137,7 @@ input[type="checkbox"] {
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  font-family: "Press Start 2P", cursive;
 }
 .btnForm {
   position: absolute;
@@ -146,11 +155,12 @@ input[type="checkbox"] {
   background: none;
   font-weight: bold;
   cursor: pointer;
+  font-family: "Press Start 2P", cursive;
 }
 
 .background-btnForm {
-  background-image: linear-gradient(to top left, #faab78, #ffd495);
-  width: 0px;
+  background-image: linear-gradient(to top left, #f957fd, #9561fe);
+  width: 102px;
   border-radius: 20px;
   z-index: -12;
   height: 100%;
@@ -199,13 +209,9 @@ input[type="checkbox"] {
   display: flex;
   align-items: center;
   margin: auto;
-  border-left: 5px solid #54b435;
-  background-color: #faab7888;
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
   box-shadow: 0 0 5px #808080;
   animation: toastShow 0.3s linear forwards;
-  display: none;
+  background-image: url(./background.png);
 }
 .toast--icon {
   display: flex;
@@ -213,24 +219,17 @@ input[type="checkbox"] {
   align-items: center;
   width: 20%;
 }
-.toast--icon i {
-  background-color: #379237;
-  color: white;
-  padding: 10px;
-  border-radius: 50%;
+.toast--icon span {
+  font-size: 150%;
 }
 .toast--text {
   width: 80%;
   font-weight: bold;
 }
 .toast--text_status {
-  font-size: 140%;
-  margin-bottom: 2%;
+  font-size: 130%;
 }
-.toast--text_content {
-  color: #80808088;
-  font-size: 90%;
-}
+
 .succesColor {
   color: #54b435;
 }
@@ -251,7 +250,8 @@ input[type="checkbox"] {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: linear-gradient(160deg, #d7e9b9, #fffbac);
+  background-image: url(./background.png);
+  background-size: cover;
   width: 100%;
   height: 100%;
   z-index: 11312321;
@@ -264,7 +264,7 @@ input[type="checkbox"] {
 }
 .load h1 {
   font-size: xxx-large;
-  color: #80808088;
+  color: #fff;
 }
 .dotLoadList {
   display: flex;
@@ -274,7 +274,7 @@ input[type="checkbox"] {
 .dotLoad {
   width: 20px;
   height: 20px;
-  background-color: #80808088;
+  background-color: #fff;
   margin: 10px;
   border-radius: 50%;
   animation: load 0.5s linear infinite alternate;
@@ -351,6 +351,6 @@ input[type="checkbox"] {
   }
   100% {
     transform: translate(0, -15px);
-    background-color: #aacb73;
+    background-color: #9561fe;
   }
 }
