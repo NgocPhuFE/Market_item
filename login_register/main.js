@@ -139,6 +139,7 @@ class toastMessage {
     this.statusColor = rest[1];
     this.icon = rest[2];
   }
+
   render = () => {
     const toast = [
       `  
