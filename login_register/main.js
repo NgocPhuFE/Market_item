@@ -13,6 +13,8 @@ const Users = [
   },
 ];
 function start() {
+  bg_btnForm.style.left = $("#login").offsetLeft + "px";
+  bg_btnForm.style.width = $("#login").offsetWidth + "px";
   btnForm();
   checkValueInput();
   checkPass();

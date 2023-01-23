@@ -1,34 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+:root {
+}
 body {
   width: 100%;
   height: 100vh;
-  background-image: linear-gradient(160deg, #d7e9b9, #fffbac);
   overflow: hidden;
-  background-repeat: no-repeat;
-  font-family: "Press Start 2P", cursive;
   margin: 0;
   padding: 0;
+  font-family: system-ui;
 }
-/* .cricle--left {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background-image: linear-gradient(to top, #faab78, #ffd495);
-  border-radius: 50%;
-  filter: blur(10px);
-  bottom: 0;
-  z-index: -12;
-  animation: animationCricleLeft 5s ease-in-out infinite alternate;
-}
-.cricle--right {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  background-image: linear-gradient(to top, #d7e9b9, #faab78);
-  border-radius: 50%;
-  top: -10%;
-  animation: animationCricleRight 7s ease-in-out infinite alternate;
-} */
 
 .container {
   width: 100%;
@@ -36,7 +15,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url(./background.png);
+  background-image: url(./backgroundgif.gif);
+  background-repeat: no-repeat;
   background-size: cover;
 }
 form {
@@ -66,7 +46,7 @@ form::before {
 .nameForm {
   padding: 0 10%;
   margin: 50px 0;
-  font-size: 200%;
+  font-size: 250%;
   font-weight: bold;
   color: #fff;
 }
@@ -94,7 +74,6 @@ form::before {
   background-color: #ffffff55;
   border: none;
   font-weight: bold;
-  font-family: "Press Start 2P", cursive;
 }
 .inputForm_pass {
   margin-top: 10%;
@@ -129,7 +108,6 @@ input[type="checkbox"] {
   width: 80%;
   font-weight: bold;
   border: none;
-  background-image: linear-gradient(to top left, #ef8dfd, #9561fe);
   box-shadow: 0 0 5px #808080;
   border-radius: 5px;
   cursor: pointer;
@@ -137,7 +115,7 @@ input[type="checkbox"] {
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  font-family: "Press Start 2P", cursive;
+  background-image: linear-gradient(to bottom left, #9561fe, #b2ccee);
 }
 .btnForm {
   position: absolute;
@@ -155,7 +133,6 @@ input[type="checkbox"] {
   background: none;
   font-weight: bold;
   cursor: pointer;
-  font-family: "Press Start 2P", cursive;
 }
 
 .background-btnForm {
@@ -211,7 +188,6 @@ input[type="checkbox"] {
   margin: auto;
   box-shadow: 0 0 5px #808080;
   animation: toastShow 0.3s linear forwards;
-  background-image: url(./background.png);
 }
 .toast--icon {
   display: flex;
@@ -227,7 +203,7 @@ input[type="checkbox"] {
   font-weight: bold;
 }
 .toast--text_status {
-  font-size: 130%;
+  font-size: 170%;
 }
 
 .succesColor {
@@ -242,14 +218,15 @@ input[type="checkbox"] {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url(./background.png);
-  background-size: cover;
   width: 100%;
   height: 100%;
   z-index: 11312321;
   margin: 0;
   padding: 0;
   display: flex;
+  background-image: url(./backgroundgif.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
   flex-direction: column;
   align-items: center;
   justify-content: center;
