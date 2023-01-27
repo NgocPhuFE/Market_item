@@ -54,7 +54,7 @@ function formLoad() {
     btnForm.setAttribute("disabled", "");
     btnCloseForm.setAttribute("disabled", "");
 
-    $(".formCheck").innerHTML = "<span>Check...</span>";
+    $(".formCheck").innerHTML = "<span>Kiểm tra...</span>";
     $(".formCheck").style.color = "black";
     e.preventDefault();
     $(".formCheck").style.display = "block";
