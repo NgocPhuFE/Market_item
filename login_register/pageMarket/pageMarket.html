@@ -13,11 +13,79 @@
     />
   </head>
   <body>
-    <div class="cricle--left"></div>
-    <div class="cricle--right"></div>
+    <div class="load">
+      <h1 class="content-load">Loading</h1>
+      <div class="dotLoadList">
+        <div class="dotLoad"></div>
+        <div class="dotLoad"></div>
+        <div class="dotLoad"></div>
+        <div class="dotLoad"></div>
+        <div class="dotLoad"></div>
+        <div class="dotLoad"></div>
+      </div>
+    </div>
+
     <div class="container">
-      <div class="frames"></div>
+      <nav class="menu">
+        <ul>
+          <li class="logo">
+            <img src="../icontitle.png" alt="" />
+          </li>
+          <div class="menu-control">
+            <li id="home">Trang chủ</li>
+            <li id="group">Diễn đàn</li>
+            <li id="event">Sự kiện</li>
+            <li id="market" class="active-li">Chợ</li>
+            <li id="warehouse">Kho</li>
+            <li id="cart">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <div class="countBuy-item">0</div>
+            </li>
+          </div>
+
+          <li id="user-avt">
+            <img src="../avt.jpg" alt="" />
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="credit">
+              Dư: <span class="point">0</span> <span> <i>[Nạp]</i></span>
+            </div>
+            <form class="formLoad">
+              <div class="formName">Nạp</div>
+              <hr />
+              <div class="formUserName">Tên: Trần Ngọc Phú</div>
+              <div class="formUserSever">Máy chủ : 179</div>
+              <div class="numberLoad">
+                <label for="">Số dư muốn nạp:</label>
+                <select name="" id="">
+                  <option value="100">100</option>
+                  <option value="500">500</option>
+                  <option value="1000">1000</option>
+                  <option value="2000">2000</option>
+                </select>
+              </div>
+              <div class="howLoad">
+                <label>Cách thức nạp:</label>
+                <select name="" id="">
+                  <option value="momo">Momo</option>
+                  <option value="bank">Ngân hàng</option>
+                </select>
+              </div>
+              <div>Gửi: <span class="numberBank">0766586738</span></div>
+              <div class="note">Thông tin điền kèm theo:</div>
+              <div class="idUser">-- ID nhân vật</div>
+              <div class="severUser">-- Sever</div>
+              <div class="btnForm">
+                <button class="formSubmit">Đã gửi</button>
+                <button class="btnClose">Thoát</button>
+              </div>
+              <div class="formCheck">
+                <span>Check...</span>
+              </div>
+            </form>
+          </li>
+        </ul>
+      </nav>
     </div>
   </body>
-  <script src="./pageMarket.js"></script>
+  <script type="module" src="./pageMarket.js"></script>
 </html>

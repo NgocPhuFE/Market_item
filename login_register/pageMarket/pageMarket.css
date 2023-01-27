@@ -1,68 +1,253 @@
 body {
   width: 100%;
   height: 100vh;
-  background-image: linear-gradient(160deg, #d7e9b9, #fffbac);
-  overflow: hidden;
+  background-image: url(../backgroundgif.gif);
   background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
   font-family: system-ui;
   margin: 0;
   padding: 0;
 }
-.cricle--left {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background-image: linear-gradient(to top, #faab78, #ffd495);
-  border-radius: 50%;
-  filter: blur(10px);
-  bottom: 0;
-  z-index: -12;
-  animation: animationCricleLeft 5s ease-in-out infinite alternate;
-}
-.cricle--right {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  background-image: linear-gradient(to top, #d7e9b9, #faab78);
-  border-radius: 50%;
-  z-index: -12;
-  top: -10%;
-  animation: animationCricleRight 7s ease-in-out infinite alternate;
-}
 .container {
-  width: 1200px;
-  height: 100%;
-  padding: 20px;
-  margin: 0 auto;
-}
-.frames {
-  background-color: #ffffff88;
   width: 100%;
-  height: 95%;
+  height: 100%;
+}
+.menu {
+  width: 100%;
+  background-color: gray;
+  height: max-content;
+}
+.menu ul {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 0.5fr;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+}
+.logo img {
+  width: 50px;
+}
+#user-avt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+#user-avt .credit {
+  font-size: 70%;
+  margin: 5px 0;
+}
+#user-avt img {
+  width: 30px;
+  border-radius: 50%;
+}
+#user-avt .fa-solid {
+  position: absolute;
+  color: #fff;
+  font-size: 70%;
+  left: 51%;
+  z-index: 1212;
+  bottom: 40%;
+  cursor: pointer;
+}
+.menu-control {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #b2ccee;
+  font-weight: bold;
+  position: relative;
+}
+.menu-control li {
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.5s;
+}
+.active-li {
+  border-radius: 10px;
+  background-color: #a9e6e855;
+}
+#cart {
+  position: relative;
+  cursor: pointer;
+}
+.countBuy-item {
+  position: absolute;
+  top: 5px;
+  font-weight: bold;
+  font-size: 70%;
+  color: #fff;
+  right: 0px;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #ff0000;
+}
+.credit i {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.credit {
+  font-weight: bold;
+  color: #b2ccee;
+}
+.credit .point {
+  color: #fff;
+}
+.formLoad {
+  width: 300px;
+  background-color: #b3adad88;
+  position: absolute;
+  top: 100%;
   border-radius: 20px;
-  box-shadow: 0 0 5px gray;
+  padding: 10px;
+  font-weight: bold;
+  display: none;
 }
-@keyframes animationCricleLeft {
+.formLoad select {
+  padding: 5px;
+  border-radius: 10px;
+  outline: none;
+}
+.formLoad select option,
+.formLoad select {
+  background-color: #b2ccee;
+  font-weight: bold;
+  color: white;
+}
+.formLoad select option[value="momo"] {
+  background-color: #9561fe;
+}
+.formLoad select option[value="bank"] {
+  background-color: #3803a3;
+}
+.formLoad select option[value="500"] {
+  background-color: #8ea7e9;
+}
+.formLoad select option[value="1000"] {
+  background-color: #6f1ab6;
+}
+.formLoad select option[value="2000"] {
+  background-color: #ff6e31;
+}
+.formLoad div {
+  margin: 5px 0;
+}
+.formName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 250%;
+}
+.btnForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btnForm button {
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 100%;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin: 0 5px;
+}
+.formCheck {
+  position: absolute;
+  width: max-content;
+  height: max-content;
+  background-color: rgb(180, 174, 174, 0.8);
+  top: 50%;
+  border-radius: 20px;
+  padding: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+.formCheck span {
+  font-size: 250%;
+  animation: checkForm 2s linear infinite alternate;
+}
+
+/* ---------------------------------------------------------- */
+.load {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 11312321;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background-image: url(../backgroundgif.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.load h1 {
+  font-size: xxx-large;
+  color: #fff;
+}
+.dotLoadList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dotLoad {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  margin: 10px;
+  border-radius: 50%;
+  animation: load 0.5s linear infinite alternate;
+}
+
+.dotLoad:nth-child(2) {
+  animation-duration: 0.51s;
+}
+.dotLoad:nth-child(3) {
+  animation-duration: 0.52s;
+}
+.dotLoad:nth-child(4) {
+  animation-duration: 0.53s;
+}
+.dotLoad:nth-child(5) {
+  animation-duration: 0.54s;
+}
+.dotLoad:nth-child(6) {
+  animation-duration: 0.55s;
+}
+@keyframes load {
   0% {
-    bottom: 0;
-    left: 0;
+    transform: translate(0, 0);
   }
   100% {
-    bottom: 5%;
-    left: 10%;
+    transform: translate(0, -15px);
+    background-color: #9561fe;
   }
 }
-@keyframes animationCricleRight {
+@keyframes checkForm {
   0% {
-    top: -10%;
-    right: 10%;
-    bottom: 100%;
-    transform: rotate(0deg);
+    transform: translate(0, 0);
   }
   100% {
-    transform: rotate(60deg);
-    top: 10%;
-    right: 10%;
-    filter: blur(5px);
+    transform: translate(0, 15px);
+    color: #fff;
   }
 }

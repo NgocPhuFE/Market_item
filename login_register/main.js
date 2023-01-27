@@ -84,8 +84,10 @@ function checkValueInput() {
   // login
   const inputTextLogin = $(".inputForm_text--login input");
   const inputpassLogin = $(".inputForm_pass--login input");
+
   $(".submitLogin").onclick = (e) => {
     e.preventDefault();
+
     Users.forEach((ev) => {
       if (
         inputTextLogin.value === ev.userName &&
@@ -105,12 +107,16 @@ function checkValueInput() {
         inputTextLogin.value !== ev.userName &&
         inputpassLogin.value !== ev.password
       ) {
-        const ErrorToast = new toastMessage(
-          "Error Login",
-          "ErrorColor",
-          "&#128517"
-        );
-        ErrorToast.render();
+        if ($(".toastMessage").innerHTML == "") {
+          const ErrorToast = new toastMessage(
+            "Error Login",
+            "ErrorColor",
+            "&#128517"
+          );
+          ErrorToast.render();
+        } else {
+          return;
+        }
       }
     });
   };
@@ -167,4 +173,5 @@ class toastMessage {
     }, 2500);
   };
 }
+export default Users;
 start();
