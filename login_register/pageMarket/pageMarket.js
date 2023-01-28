@@ -358,7 +358,7 @@ function renDer(arr) {
       `
     <div class="img">
       <img
-        src="/login_register/pageMarket/imgPageMarket/${e.img}"
+        src="./imgPageMarket/${e.img}"
         alt=""
       />
     </div>
@@ -392,7 +392,6 @@ function handleSreach(data) {
     const rarity = $('select[name="rarity"]');
     const minPrice = $("#minPrice");
     const maxPrice = $("#maxPrice");
-
     const resultItem = data.filter((e) => {
       if (type.value !== "") {
         if (type.value !== e.load) {
