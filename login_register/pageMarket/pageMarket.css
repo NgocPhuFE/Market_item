@@ -286,14 +286,10 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
-.img img:hover {
-  transform: rotate(45deg);
-}
 
 .img img {
   width: 80%;
   height: 144px;
-
   transition: all 0.5s;
   background-size: cover;
 }

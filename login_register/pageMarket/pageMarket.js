@@ -166,7 +166,7 @@ const listItems = [
       st: "+ 350 STVL",
       tdd: "+ 75 Tốc độ đánh",
       blood: "+ 890 Máu",
-      healling: "+ 30% tỉ lệ độc địch",
+      healling: "+ 30% tỉ lệ đầu độc địch",
     },
   },
   {
@@ -279,6 +279,7 @@ function start() {
   handleMenu();
   formLoad();
   renDer(listItems);
+  handleSreach(listItems);
 }
 function handleMenu() {
   const menuControl = $$(".menu-control li");
@@ -349,10 +350,10 @@ function formLoad() {
     $(".formLoad").style.display = "none";
   };
 }
-
 function renDer(arr) {
+  const list = $(".listItem");
+  list.innerHTML = "";
   arr.forEach((e) => {
-    const list = $(".listItem");
     const framesItem = [
       `
     <div class="img">
@@ -383,6 +384,40 @@ function renDer(arr) {
     divItem.innerHTML = framesItem;
     list.appendChild(divItem);
   });
+}
+function handleSreach(data) {
+  const btnSreach = $(".btnSreach");
+  btnSreach.onclick = () => {
+    const type = $('select[name="types"]');
+    const rarity = $('select[name="rarity"]');
+    const minPrice = $("#minPrice");
+    const maxPrice = $("#maxPrice");
+
+    const resultItem = data.filter((e) => {
+      if (type.value !== "") {
+        if (type.value !== e.load) {
+          return false;
+        }
+      }
+      if (rarity.value !== "") {
+        if (rarity.value !== e.ratiry) {
+          return false;
+        }
+      }
+      if (minPrice.value !== "") {
+        if (Number(e.price) < minPrice.value) {
+          return false;
+        }
+      }
+      if (maxPrice.value !== "") {
+        if (Number(e.price) > maxPrice.value) {
+          return false;
+        }
+      }
+      return true;
+    });
+    renDer(resultItem);
+  };
 }
 start();
 // ---------- hover vao` gio hang xuat hien tab hang` hoa
