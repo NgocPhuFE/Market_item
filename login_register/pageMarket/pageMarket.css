@@ -280,7 +280,7 @@ body {
   transform: translate(-50%, -50%);
   content: "";
   background-color: #fff;
-  background-image: url("./pngegg.png");
+  background-image: url("/Market_item/login_register/pageMarket/pngegg.png");
   border-radius: 50%;
   z-index: -1;
   background-repeat: no-repeat;
