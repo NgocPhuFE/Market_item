@@ -85,6 +85,49 @@
           </li>
         </ul>
       </nav>
+      <div class="border"></div>
+      <section class="body">
+        <div class="menuSreach">
+          <div class="types">
+            <label for="">Loại:</label>
+            <select name="types" id="">
+              <option value="">Không</option>
+              <option value="sword">Kiếm</option>
+              <option value="bow">Cung</option>
+              <option value="spear">Thương</option>
+              <option value="gun">Súng</option>
+            </select>
+          </div>
+          <div class="rarity">
+            <label for="">Độ hiếm:</label>
+            <select name="rarity" id="">
+              <option value="">Không</option>
+              <option value="normal">Bình thường</option>
+              <option value="rare">Hiếm</option>
+              <option value="superRare">Siêu hiếm</option>
+              <option value="epic">Sử thi</option>
+              <option value="legendary">Huyền thoại</option>
+            </select>
+          </div>
+
+          <div class="price">
+            <input
+              type="number"
+              name=""
+              id="minPrice"
+              placeholder="Giá thấp nhất"
+            />
+            <input
+              type="number"
+              name=""
+              id="maxPrice"
+              placeholder="Giá cao nhất"
+            />
+          </div>
+          <button class="btnSreach">Lọc</button>
+        </div>
+        <div class="listItem"></div>
+      </section>
     </div>
   </body>
   <script type="module" src="./pageMarket.js"></script>

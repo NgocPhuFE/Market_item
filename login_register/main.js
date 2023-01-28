@@ -104,7 +104,9 @@ function checkValueInput() {
             "/Market_item/login_register/pageMarket/pageMarket.html";
         }, 800);
       } else if (
-        inputTextLogin.value !== ev.userName &&
+        (inputTextLogin.value !== ev.userName &&
+          inputpassLogin.value !== ev.password) ||
+        inputTextLogin.value !== ev.userName ||
         inputpassLogin.value !== ev.password
       ) {
         if ($(".toastMessage").innerHTML == "") {
