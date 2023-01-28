@@ -358,7 +358,7 @@ function renDer(arr) {
       `
     <div class="img">
       <img
-        src="./imgPageMarket/${e.img}"
+        src="../${e.img}"
         alt=""
       />
     </div>
