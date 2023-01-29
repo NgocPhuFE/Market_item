@@ -107,13 +107,14 @@ body {
 }
 .formLoad {
   width: 300px;
-  background-color: #b3adad88;
+  background-color: #b3adad;
   position: absolute;
   top: 100%;
   border-radius: 20px;
   padding: 10px;
   font-weight: bold;
   display: none;
+  z-index: 1213215;
 }
 .formLoad select,
 .menuSreach select {
