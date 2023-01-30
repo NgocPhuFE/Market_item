@@ -288,7 +288,14 @@ function handleMenu() {
       if (
         e.target.id === "cart" ||
         e.target.classList.contains("fa-cart-shopping") ||
-        e.target.classList.contains("countBuy-item")
+        e.target.classList.contains("countBuy-item") ||
+        e.target.classList.contains("itemTab") ||
+        e.target.classList.contains("itemInfo-btn-buy") ||
+        e.target.classList.contains("itemInfo-btn-delete") ||
+        e.target.classList.contains("itemInfo-Name") ||
+        e.target.classList.contains("itemImg") ||
+        e.target.classList.contains("tabMore") ||
+        e.target.classList.contains("defaulTab")
       ) {
         return;
       }
@@ -350,16 +357,92 @@ function formLoad() {
     $(".formLoad").style.display = "none";
   };
 }
+
+class addItemTab {
+  constructor(...arr) {
+    this.img = arr[0];
+    this.name = arr[1];
+    this.ratiry = arr[2];
+    this.price = arr[3];
+    this.info_ratiry = arr[4];
+  }
+  input = () => {
+    const framesItemTab = [
+      `
+      <div class="itemInfo-rati"> ${this.info_ratiry}</div>
+  
+    <img
+      src="/login_register/pageMarket/${this.img}"
+      alt=""
+      class="itemImg"
+      title="${this.info_ratiry}"
+    />
+    <div class="itemInfo">
+      <div class="itemInfo-Name">${this.name}</div>
+      <div class="itemInfoPR">
+      <div class="itemInfo-price">Giá: ${this.price}</div>
+      </div>
+    </div>
+    <div class="itemInfo-btn">
+      <div class="itemInfo-btn-buy">Mua</div>
+      <div class="itemInfo-btn-delete ${this.img}" >Xóa</div>
+    </div>
+  `,
+    ].join("");
+    var divItemTab = document.createElement("div");
+    divItemTab.classList.add("itemTab");
+    divItemTab.classList.add(`${this.ratiry}`);
+    divItemTab.classList.add(`${this.img}`);
+    divItemTab.innerHTML = framesItemTab;
+    const resultItemTab = [];
+    for (let i = 0; i < $$(".itemTab").length; i++) {
+      resultItemTab.push($$(".itemInfo-Name")[i].innerHTML);
+    }
+    // event loop item
+    if ($$(".itemTab").length == 0) {
+      $(".tabMore").appendChild(divItemTab);
+    } else {
+      const resultCount = resultItemTab.filter((e) => {
+        return e === this.name;
+      });
+      if (resultCount.length < 1) {
+        $(".tabMore").appendChild(divItemTab);
+      }
+    }
+    // create crollbar
+    if ($$(".itemTab").length > 5) {
+      $(".tabMore").style.height = 450 + "px";
+    }
+    $(".countBuy-item").innerHTML = "";
+    $(".countBuy-item").innerHTML = $$(".itemTab").length;
+    $(".defaulTab").style.display = "none";
+    // delete item
+    $$(".itemInfo-btn-delete").forEach((e) => {
+      e.onclick = (ev) => {
+        $$(".itemTab").forEach((e) => {
+          if (e.classList[2] == ev.target.classList[1]) {
+            e.remove();
+            $(".countBuy-item").innerHTML = "";
+            $(".countBuy-item").innerHTML = $$(".itemTab").length;
+            if ($$(".itemTab").length < 1) {
+              $(".defaulTab").style.display = "flex";
+            }
+          }
+        });
+      };
+    });
+  };
+}
 function renDer(arr) {
   const list = $(".listItem");
   list.innerHTML = "";
+  // src="/Market_item/login_register/pageMarket/${e.img}"
   arr.forEach((e) => {
     const framesItem = [
       `
     <div class="img">
       <img
-        src="/Market_item/login_register/pageMarket/${e.img}"
-        alt=""
+      src="../pageMarket/${e.img}"
       />
     </div>
     <div class="itemName">${e.name}</div>
@@ -372,10 +455,11 @@ function renDer(arr) {
  
     <div class="btnItem">
       <button class="buyItem">Mua</button>
-      <button class="addItem">Thêm</button>
+      <button class="addItem" data-info-ratiry="${e.info.ratiry}" data-img = "${e.img}" data-name = "${e.name}" data-ratiry = "${e.ratiry}" data-price ="${e.price}">Thêm</button>
     </div>
     <div class="piceItem">Giá:<span id="priceItem">${e.price}</span></div>
     <div class="rankRatiry ${e.ratiry}">${e.info.ratiry}</div>
+  
   `,
     ].join("");
     let divItem = document.createElement("div");
@@ -383,6 +467,18 @@ function renDer(arr) {
     divItem.classList.add(`${e.ratiry}`);
     divItem.innerHTML = framesItem;
     list.appendChild(divItem);
+    $$(".addItem").forEach((e) => {
+      e.onclick = () => {
+        const addI = new addItemTab(
+          e.getAttribute("data-img"),
+          e.getAttribute("data-name"),
+          e.getAttribute("data-ratiry"),
+          e.getAttribute("data-price"),
+          e.getAttribute("data-info-ratiry")
+        );
+        addI.input();
+      };
+    });
   });
 }
 function handleSreach(data) {
@@ -417,6 +513,9 @@ function handleSreach(data) {
     });
     renDer(resultItem);
   };
+}
+function delItemTab(id) {
+  console.log(id);
 }
 start();
 // ---------- hover vao` gio hang xuat hien tab hang` hoa
