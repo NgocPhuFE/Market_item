@@ -372,7 +372,7 @@ class addItemTab {
       <div class="itemInfo-rati"> ${this.info_ratiry}</div>
   
     <img
-      src="/Market_item/login_register/pageMarket/${this.img}"
+      src="../pageMarket/${this.img}"
       alt=""
       class="itemImg"
       title="${this.info_ratiry}"
