@@ -427,6 +427,9 @@ class addItemTab {
             if ($$(".itemTab").length < 1) {
               $(".defaulTab").style.display = "flex";
             }
+            if ($$(".itemTab").length < 6) {
+              $(".tabMore").style.height = "max-content";
+            }
           }
         });
       };
