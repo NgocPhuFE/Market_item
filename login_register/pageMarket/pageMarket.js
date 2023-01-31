@@ -639,44 +639,45 @@ function renDer(arr) {
     });
   });
 }
+const btnSreach = $(".btnSreach");
+btnSreach.onclick = () => {
+  handleSreach(listItems);
+};
 function handleSreach(data) {
-  const btnSreach = $(".btnSreach");
-  btnSreach.onclick = () => {
-    const type = $('select[name="types"]');
-    const rarity = $('select[name="rarity"]');
-    const minPrice = $("#minPrice");
-    const maxPrice = $("#maxPrice");
-    const resultItem = data.filter((e) => {
-      if (type.value !== "") {
-        if (type.value !== e.load) {
-          return false;
-        }
+  const type = $('select[name="types"]');
+  const rarity = $('select[name="rarity"]');
+  const minPrice = $("#minPrice");
+  const maxPrice = $("#maxPrice");
+  const resultItem = data.filter((e) => {
+    if (type.value !== "") {
+      if (type.value !== e.load) {
+        return false;
       }
-      if (rarity.value !== "") {
-        if (rarity.value !== e.ratiry) {
-          return false;
-        }
+    }
+    if (rarity.value !== "") {
+      if (rarity.value !== e.ratiry) {
+        return false;
       }
-      if (minPrice.value !== "") {
-        if (Number(e.price) < minPrice.value) {
-          return false;
-        }
+    }
+    if (minPrice.value !== "") {
+      if (Number(e.price) < minPrice.value) {
+        return false;
       }
-      if (maxPrice.value !== "") {
-        if (Number(e.price) > maxPrice.value) {
-          return false;
-        }
+    }
+    if (maxPrice.value !== "") {
+      if (Number(e.price) > maxPrice.value) {
+        return false;
       }
-      return true;
-    });
-    renDer(resultItem);
-  };
+    }
+    return true;
+  });
+  renDer(resultItem);
+  console.log(data);
 }
 function start() {
   handleMenu();
   formLoad();
   renDer(listItems);
-  handleSreach(listItems);
 }
 start();
 // ---------- hover vao` gio hang xuat hien tab hang` hoa
