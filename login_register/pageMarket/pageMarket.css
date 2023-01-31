@@ -116,7 +116,21 @@ body {
 .tabMore::-webkit-scrollbar {
   display: none;
 }
-
+.btnTabMore {
+  display: none;
+}
+.btnTabMore button {
+  background: none;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-weight: bold;
+  border: 2px solid #013472;
+  border-radius: 10px;
+}
+.btnTabMore button:hover {
+  background-color: #096cec;
+  color: #fff;
+}
 .defaulTab {
   display: flex;
 }

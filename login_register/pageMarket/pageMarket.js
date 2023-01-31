@@ -295,7 +295,9 @@ function handleMenu() {
         e.target.classList.contains("itemInfo-Name") ||
         e.target.classList.contains("itemImg") ||
         e.target.classList.contains("tabMore") ||
-        e.target.classList.contains("defaulTab")
+        e.target.classList.contains("defaulTab") ||
+        e.target.classList.contains("btnTabMore-buy") ||
+        e.target.classList.contains("btnTabMore-delAll")
       ) {
         return;
       }
@@ -358,7 +360,7 @@ function formLoad() {
   };
 }
 
-class addItemTab {
+class HandelItemTab {
   constructor(...arr) {
     this.img = arr[0];
     this.name = arr[1];
@@ -366,7 +368,7 @@ class addItemTab {
     this.price = arr[3];
     this.info_ratiry = arr[4];
   }
-  input = () => {
+  HandelAddItem = () => {
     const framesItemTab = [
       `
       <div class="itemInfo-rati"> ${this.info_ratiry}</div>
@@ -413,6 +415,10 @@ class addItemTab {
     if ($$(".itemTab").length > 5) {
       $(".tabMore").style.height = 450 + "px";
     }
+    // show btnTabMore
+    if ($$(".itemTab").length > 0) {
+      $(".btnTabMore").style.display = "block";
+    }
     $(".countBuy-item").innerHTML = "";
     $(".countBuy-item").innerHTML = $$(".itemTab").length;
     $(".defaulTab").style.display = "none";
@@ -426,6 +432,7 @@ class addItemTab {
             $(".countBuy-item").innerHTML = $$(".itemTab").length;
             if ($$(".itemTab").length < 1) {
               $(".defaulTab").style.display = "flex";
+              $(".btnTabMore").style.display = "none";
             }
             if ($$(".itemTab").length < 6) {
               $(".tabMore").style.height = "max-content";
@@ -434,6 +441,15 @@ class addItemTab {
         });
       };
     });
+    $(".btnTabMore-delAll").onclick = () => {
+      $$(".itemTab").forEach((e) => {
+        e.remove();
+      });
+      $(".btnTabMore").style.display = "none";
+      $(".defaulTab").style.display = "flex";
+      $(".countBuy-item").innerHTML = "";
+      $(".countBuy-item").innerHTML = $$(".itemTab").length;
+    };
   };
 }
 function renDer(arr) {
@@ -457,7 +473,7 @@ function renDer(arr) {
     </div>
  
     <div class="btnItem">
-      <button class="buyItem">Mua</button>
+      <button class="buyItem" data-info-ratiry-buy="${e.info.ratiry}" data-img-buy = "${e.img}" data-name-buy = "${e.name}" data-ratiry-buy = "${e.ratiry}" data-price-buy ="${e.price}">Mua</button>
       <button class="addItem" data-info-ratiry="${e.info.ratiry}" data-img = "${e.img}" data-name = "${e.name}" data-ratiry = "${e.ratiry}" data-price ="${e.price}">Thêm</button>
     </div>
     <div class="piceItem">Giá:<span id="priceItem">${e.price}</span></div>
@@ -472,15 +488,18 @@ function renDer(arr) {
     list.appendChild(divItem);
     $$(".addItem").forEach((e) => {
       e.onclick = () => {
-        const addI = new addItemTab(
+        const addI = new HandelItemTab(
           e.getAttribute("data-img"),
           e.getAttribute("data-name"),
           e.getAttribute("data-ratiry"),
           e.getAttribute("data-price"),
           e.getAttribute("data-info-ratiry")
         );
-        addI.input();
+        addI.HandelAddItem();
       };
+    });
+    $$(".buyItem").forEach((e) => {
+      e.onclick = () => {};
     });
   });
 }
@@ -517,8 +536,6 @@ function handleSreach(data) {
     renDer(resultItem);
   };
 }
-function delItemTab(id) {
-  console.log(id);
-}
+
 start();
 // ---------- hover vao` gio hang xuat hien tab hang` hoa
