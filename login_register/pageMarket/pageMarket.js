@@ -3,7 +3,7 @@ window.onload = () => {
 };
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
-const listItems = [
+let listItems = [
   {
     id: 1,
     img: "sword.png",
@@ -367,6 +367,11 @@ class HandelItemTab {
     this.ratiry = arr[2];
     this.price = arr[3];
     this.info_ratiry = arr[4];
+    this.info_st = arr[5];
+    this.info_tdd = arr[6];
+    this.info_heal = arr[7];
+    this.info_blood = arr[8];
+    this.id = arr[9];
   }
   HandelAddItem = () => {
     const framesItemTab = [
@@ -386,7 +391,7 @@ class HandelItemTab {
       </div>
     </div>
     <div class="itemInfo-btn">
-      <div class="itemInfo-btn-buy">Mua</div>
+      <div class="itemInfo-btn-buy ${this.img}">Mua</div>
       <div class="itemInfo-btn-delete ${this.img}" >Xóa</div>
     </div>
   `,
@@ -450,6 +455,127 @@ class HandelItemTab {
       $(".countBuy-item").innerHTML = "";
       $(".countBuy-item").innerHTML = $$(".itemTab").length;
     };
+    $$(".itemInfo-btn-buy").forEach((ez) => {
+      ez.onclick = (ev) => {
+        $$(".itemTab").forEach((e) => {
+          if (ev.target.classList[1] === e.classList[2]) {
+            console.log(
+              this.img,
+              this.name,
+              this.ratiry,
+              this.price,
+              this.info_ratiry,
+              this.info_st,
+              this.info_tdd,
+              this.info_heal,
+              this.info_blood,
+              this.id
+            );
+            console.log(ev.target.classList[1]);
+            console.log(e.classList[2]);
+            const creditUser = Number($(".point").innerHTML);
+            const priceItem = Number(this.price);
+            const remainingPrice = creditUser - priceItem;
+            showFormBuy(
+              this.img,
+              this.name,
+              this.ratiry,
+              this.price,
+              this.info_ratiry,
+              this.info_st,
+              this.info_tdd,
+              this.info_heal,
+              this.info_blood,
+              this.id
+            );
+            $(".formBuy").style.display = "flex";
+            $(".formBuy-pay").onclick = (es) => {
+              es.preventDefault();
+              if (creditUser >= priceItem) {
+                e.remove();
+                $(".btnTabMore").style.display = "none";
+                $(".defaulTab").style.display = "flex";
+                $(".countBuy-item").innerHTML = "";
+                $(".countBuy-item").innerHTML = $$(".itemTab").length;
+                const resultListItem = listItems.filter((event) => {
+                  if (event.id == this.id) {
+                    return false;
+                  }
+                  return true;
+                });
+                listItems = resultListItem;
+                renDer(listItems);
+                $(".formBuy").style.display = "none";
+                $(".point").innerHTML = "";
+                $(".point").innerHTML = remainingPrice;
+              }
+            };
+            return;
+            // thu bang vong lap for
+          }
+        });
+      };
+    });
+  };
+}
+function showFormBuy(...arr) {
+  const creditUser = Number($(".point").innerHTML);
+  const priceItem = Number(arr[3]);
+  const remainingPrice = creditUser - priceItem;
+  const framesFormBuy = [
+    `<form action="" class="${arr[2]}">
+    <div class="NameForm">Vật Phẩm</div>
+    <div class="formBuy-img">
+      <img src="../pageMarket/${arr[0]}" alt="" />
+      <div class="formBuy-priceItem">Giá: <span>${arr[3]}</span></div>
+      <div class="formBuy-ratiry ${arr[2]}">${arr[4]}</div></div>
+    </div>
+    <hr />
+    <div class="formBuy-nameItem">${arr[1]}</div>
+    <div class="formBuy-Footer">
+      <div class="itemStats">
+        <span class="strong"> ${arr[5]}</span>
+        <span class="strong">  ${arr[6]}</span>
+        <span class="strong">  ${arr[7]}</span>
+        <span class="strong">  ${arr[8]}</span>
+      </div>
+      <div class="formBuy-end">
+        <div class="formBuy-creditUser">Số dư: <span>${creditUser}</span></div>
+        <div class="formBuy-remaining">
+          Số dư sau thanh toán: <span>${creditUser}</span> - <span>${priceItem}</span> =
+          <span class="remaining">${remainingPrice}</span>
+        </div>
+
+        <button class="formBuy-pay">Thanh toán</button>
+        <button class="formBuy-out">Tắt</button>
+      </div>
+    </div>
+  </form>`,
+  ].join("");
+  $(".formBuy").innerHTML = framesFormBuy;
+  $(".formBuy-out").onclick = (e) => {
+    e.preventDefault();
+    $(".formBuy").innerHTML = "";
+    $(".formBuy").style.display = "none";
+  };
+  $(".formBuy-pay").onclick = (e) => {
+    e.preventDefault();
+    if (creditUser >= priceItem) {
+      $(".formBuy").innerHTML = "";
+      $(".formBuy").style.display = "none";
+      $(".point").innerHTML = "";
+      $(".point").innerHTML = remainingPrice;
+      const resultListItem = listItems.filter((e) => {
+        if (e.id == arr[9]) {
+          return false;
+        }
+        return true;
+      });
+      listItems = resultListItem;
+      renDer(listItems);
+    } else {
+      return false;
+    }
   };
 }
 function renDer(arr) {
@@ -473,8 +599,8 @@ function renDer(arr) {
     </div>
  
     <div class="btnItem">
-      <button class="buyItem" data-info-ratiry-buy="${e.info.ratiry}" data-img-buy = "${e.img}" data-name-buy = "${e.name}" data-ratiry-buy = "${e.ratiry}" data-price-buy ="${e.price}">Mua</button>
-      <button class="addItem" data-info-ratiry="${e.info.ratiry}" data-img = "${e.img}" data-name = "${e.name}" data-ratiry = "${e.ratiry}" data-price ="${e.price}">Thêm</button>
+      <button class="buyItem" data-id = "${e.id}" data-info-st ="${e.info.st}" data-info-tdd ="${e.info.tdd}" data-info-heal ="${e.info.healling}" data-info-blood ="${e.info.blood}"  data-info-ratiry-buy="${e.info.ratiry}" data-img-buy = "${e.img}" data-name-buy = "${e.name}" data-ratiry-buy = "${e.ratiry}" data-price-buy ="${e.price}">Mua</button>
+      <button class="addItem" data-id = "${e.id}" data-info-st ="${e.info.st}" data-info-tdd ="${e.info.tdd}" data-info-heal ="${e.info.healling}" data-info-blood ="${e.info.blood}" data-info-ratiry="${e.info.ratiry}" data-img = "${e.img}" data-name = "${e.name}" data-ratiry = "${e.ratiry}" data-price ="${e.price}">Thêm</button>
     </div>
     <div class="piceItem">Giá:<span id="priceItem">${e.price}</span></div>
     <div class="rankRatiry ${e.ratiry}">${e.info.ratiry}</div>
@@ -493,13 +619,32 @@ function renDer(arr) {
           e.getAttribute("data-name"),
           e.getAttribute("data-ratiry"),
           e.getAttribute("data-price"),
-          e.getAttribute("data-info-ratiry")
+          e.getAttribute("data-info-ratiry"),
+          e.getAttribute("data-info-st"),
+          e.getAttribute("data-info-tdd"),
+          e.getAttribute("data-info-heal"),
+          e.getAttribute("data-info-blood"),
+          e.getAttribute("data-id")
         );
         addI.HandelAddItem();
       };
     });
     $$(".buyItem").forEach((e) => {
-      e.onclick = () => {};
+      e.onclick = () => {
+        showFormBuy(
+          e.getAttribute("data-img-buy"),
+          e.getAttribute("data-name-buy"),
+          e.getAttribute("data-ratiry-buy"),
+          e.getAttribute("data-price-buy"),
+          e.getAttribute("data-info-ratiry-buy"),
+          e.getAttribute("data-info-st"),
+          e.getAttribute("data-info-tdd"),
+          e.getAttribute("data-info-heal"),
+          e.getAttribute("data-info-blood"),
+          e.getAttribute("data-id")
+        );
+        $(".formBuy").style.display = "flex";
+      };
     });
   });
 }
