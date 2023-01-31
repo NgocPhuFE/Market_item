@@ -275,12 +275,7 @@ let listItems = [
     },
   },
 ];
-function start() {
-  handleMenu();
-  formLoad();
-  renDer(listItems);
-  handleSreach(listItems);
-}
+
 function handleMenu() {
   const menuControl = $$(".menu-control li");
   menuControl.forEach((element) => {
@@ -455,50 +450,39 @@ class HandelItemTab {
       $(".countBuy-item").innerHTML = "";
       $(".countBuy-item").innerHTML = $$(".itemTab").length;
     };
+    // Check even click button Buy in cart
     $$(".itemInfo-btn-buy").forEach((ez) => {
       ez.onclick = (ev) => {
-        $$(".itemTab").forEach((e) => {
-          if (ev.target.classList[1] === e.classList[2]) {
-            console.log(
-              this.img,
-              this.name,
-              this.ratiry,
-              this.price,
-              this.info_ratiry,
-              this.info_st,
-              this.info_tdd,
-              this.info_heal,
-              this.info_blood,
-              this.id
-            );
-            console.log(ev.target.classList[1]);
-            console.log(e.classList[2]);
+        for (let i = 0; i < $$(".itemTab").length; i++) {
+          if ($$(".itemTab")[i].classList[2] === ev.target.classList[1]) {
+            const result = listItems.find((item) => {
+              return item.img === $$(".itemTab")[i].classList[2];
+            });
             const creditUser = Number($(".point").innerHTML);
-            const priceItem = Number(this.price);
+            const priceItem = Number(result.price);
             const remainingPrice = creditUser - priceItem;
             showFormBuy(
-              this.img,
-              this.name,
-              this.ratiry,
-              this.price,
-              this.info_ratiry,
-              this.info_st,
-              this.info_tdd,
-              this.info_heal,
-              this.info_blood,
-              this.id
+              result.img,
+              result.name,
+              result.ratiry,
+              result.price,
+              result.info.ratiry,
+              result.info.st,
+              result.info.tdd,
+              result.info.healling,
+              result.info.blood,
+              result.id
             );
             $(".formBuy").style.display = "flex";
             $(".formBuy-pay").onclick = (es) => {
               es.preventDefault();
               if (creditUser >= priceItem) {
-                e.remove();
-                $(".btnTabMore").style.display = "none";
-                $(".defaulTab").style.display = "flex";
+                $$(".itemTab")[i].remove();
                 $(".countBuy-item").innerHTML = "";
                 $(".countBuy-item").innerHTML = $$(".itemTab").length;
+                // output sceen listArr new
                 const resultListItem = listItems.filter((event) => {
-                  if (event.id == this.id) {
+                  if (event.id == result.id) {
                     return false;
                   }
                   return true;
@@ -509,11 +493,14 @@ class HandelItemTab {
                 $(".point").innerHTML = "";
                 $(".point").innerHTML = remainingPrice;
               }
+              // check item in arr if length arr < 1 handle
+              if ($$(".itemTab").length < 1) {
+                $(".btnTabMore").style.display = "none";
+                $(".defaulTab").style.display = "flex";
+              }
             };
-            return;
-            // thu bang vong lap for
           }
-        });
+        }
       };
     });
   };
@@ -681,6 +668,11 @@ function handleSreach(data) {
     renDer(resultItem);
   };
 }
-
+function start() {
+  handleMenu();
+  formLoad();
+  renDer(listItems);
+  handleSreach(listItems);
+}
 start();
 // ---------- hover vao` gio hang xuat hien tab hang` hoa
