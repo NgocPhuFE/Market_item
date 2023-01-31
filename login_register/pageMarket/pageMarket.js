@@ -416,7 +416,7 @@ class HandelItemTab {
       $(".tabMore").style.height = 450 + "px";
     }
     // show btnTabMore
-    if ($$(".itemTab").length > 0) {
+    if ($$(".itemTab").length > 1) {
       $(".btnTabMore").style.display = "block";
     }
     $(".countBuy-item").innerHTML = "";
@@ -432,6 +432,8 @@ class HandelItemTab {
             $(".countBuy-item").innerHTML = $$(".itemTab").length;
             if ($$(".itemTab").length < 1) {
               $(".defaulTab").style.display = "flex";
+            }
+            if ($$(".itemTab").length < 2) {
               $(".btnTabMore").style.display = "none";
             }
             if ($$(".itemTab").length < 6) {
@@ -495,8 +497,10 @@ class HandelItemTab {
               }
               // check item in arr if length arr < 1 handle
               if ($$(".itemTab").length < 1) {
-                $(".btnTabMore").style.display = "none";
                 $(".defaulTab").style.display = "flex";
+              }
+              if ($$(".itemTab").length < 2) {
+                $(".btnTabMore").style.display = "none";
               }
             };
           }
