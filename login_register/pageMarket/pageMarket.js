@@ -386,15 +386,15 @@ class HandelItemTab {
       </div>
     </div>
     <div class="itemInfo-btn">
-      <div class="itemInfo-btn-buy ${this.img}">Mua</div>
-      <div class="itemInfo-btn-delete ${this.img}" >Xóa</div>
+      <div class="itemInfo-btn-buy ${this.id}">Mua</div>
+      <div class="itemInfo-btn-delete ${this.id}" >Xóa</div>
     </div>
   `,
     ].join("");
     var divItemTab = document.createElement("div");
     divItemTab.classList.add("itemTab");
     divItemTab.classList.add(`${this.ratiry}`);
-    divItemTab.classList.add(`${this.img}`);
+    divItemTab.classList.add(`${this.id}`);
     divItemTab.innerHTML = framesItemTab;
     const resultItemTab = [];
     for (let i = 0; i < $$(".itemTab").length; i++) {
@@ -458,8 +458,10 @@ class HandelItemTab {
         for (let i = 0; i < $$(".itemTab").length; i++) {
           if ($$(".itemTab")[i].classList[2] === ev.target.classList[1]) {
             const result = listItems.find((item) => {
-              return item.img === $$(".itemTab")[i].classList[2];
+              return item.id === Number($$(".itemTab")[i].classList[2]);
             });
+            console.log(result);
+
             const creditUser = Number($(".point").innerHTML);
             const priceItem = Number(result.price);
             const remainingPrice = creditUser - priceItem;
@@ -674,10 +676,105 @@ function handleSreach(data) {
   renDer(resultItem);
   console.log(data);
 }
+const payAll = $(".btnTabMore-buy");
+payAll.onclick = () => {
+  $(".payAllItemCart").style.display = "flex";
+  payAllItemCart(listItems);
+};
+function payAllItemCart(data) {
+  const items = $$(".tabMore .itemTab");
+  const listItem = $(".payAllItemCart-item-frames-listitem");
+  listItem.innerHTML = "";
+  let sumPrice = 0;
+
+  items.forEach((ev) => {
+    const resultItem = data.find((item) => {
+      return item.id === Number(ev.classList[2]);
+    });
+    const HTML = [
+      `
+    <div class="payAllItemCart-item-img">
+      <img src="../pageMarket/${resultItem.img}" alt="" />
+      <div class="payAllItemCart-item-ratiry ${resultItem.ratiry}">${resultItem.info.ratiry}</div>
+    </div>
+    <div class="payAllItemCart-item-nameItem">
+    ${resultItem.name}
+      <span
+        >Giá:
+        <span class="payAllItemCart-item-price">${resultItem.price}</span></span
+      >
+    </div>
+    <div class="payAllItemCart-item-properties">
+      <span class="strong">${resultItem.info.st}</span>
+      <span class="strong">${resultItem.info.tdd}</span>
+      <span class="strong">${resultItem.info.blood}</span>
+      <span class="strong">${resultItem.info.healling}</span>
+    </div>
+    `,
+    ].join("");
+    const divAllItemCart = document.createElement("div");
+    divAllItemCart.classList.add("payAllItemCart-item-frames-item");
+    divAllItemCart.classList.add(`${resultItem.ratiry}`);
+    divAllItemCart.innerHTML = HTML;
+    listItem.appendChild(divAllItemCart);
+    $(".payAllItemCart-item-name span").innerHTML = "";
+    $(".payAllItemCart-item-name span").innerHTML = items.length;
+    sumPrice += Number(resultItem.price);
+  });
+  const point = $(".point");
+  const resultNumber = Number(point.innerHTML) - sumPrice;
+  $(".payAllItemCart-item-frames-pay-surplus span").innerHTML = "";
+  $(".payAllItemCart-item-frames-pay-surplus span").innerHTML = point.innerHTML;
+  $(".pointUser").innerHTML = "";
+  $(".pointUser").innerHTML = point.innerHTML;
+  $(".sumPrice").innerHTML = "";
+  $(".sumPrice").innerHTML = Number(sumPrice);
+  $(".resultNumber").innerHTML = "";
+  $(".resultNumber").innerHTML = resultNumber;
+  // click btn hid form
+  $(".payAllItemCart-out").onclick = (e) => {
+    e.preventDefault();
+    $(".payAllItemCart").style.display = "none";
+  };
+  $(".payAllItemCart-buy").onclick = (e) => {
+    let resultItem = [];
+    let result = [];
+    e.preventDefault();
+    if (point.innerHTML >= sumPrice) {
+      point.innerHTML = "";
+      point.innerHTML = resultNumber;
+      items.forEach((e) => {
+        data.find((item) => {
+          if (Number(e.classList[2]) === item.id) {
+            result.push(item);
+          }
+        });
+        e.remove();
+      });
+      for (var i = 0; i < result.length; i++) {
+        resultItem = data.filter((e) => {
+          if (Number(result[i].id) === e.id) {
+            return false;
+          }
+          return true;
+        });
+        data = resultItem;
+      }
+      listItems = data;
+      renDer(listItems);
+      listItem.innerHTML = "";
+      $(".payAllItemCart").style.display = "none";
+      $(".btnTabMore").style.display = "none";
+      $(".countBuy-item").innerHTML = "0";
+      $(".defaulTab").style.display = "flex";
+    }
+  };
+}
 function start() {
   handleMenu();
   formLoad();
   renDer(listItems);
 }
 start();
+
 // ---------- hover vao` gio hang xuat hien tab hang` hoa
