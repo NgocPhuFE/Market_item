@@ -189,21 +189,16 @@ input[type="checkbox"] {
   box-shadow: 0 0 5px #808080;
   animation: toastShow 0.3s linear forwards;
 }
-.toast--icon {
+
+.toast--text {
+  width: 100%;
+  font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20%;
-}
-.toast--icon span {
-  font-size: 150%;
-}
-.toast--text {
-  width: 80%;
-  font-weight: bold;
 }
 .toast--text_status {
-  font-size: 170%;
+  font-size: 220%;
 }
 
 .succesColor {

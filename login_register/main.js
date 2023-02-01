@@ -95,8 +95,7 @@ function checkValueInput() {
       ) {
         const SuccessToast = new toastMessage(
           "Successful Login",
-          "succesColor",
-          "&#128521"
+          "succesColor"
         );
         SuccessToast.render();
         setTimeout(() => {
@@ -110,11 +109,7 @@ function checkValueInput() {
         inputpassLogin.value !== ev.password
       ) {
         if ($(".toastMessage").innerHTML == "") {
-          const ErrorToast = new toastMessage(
-            "Error Login",
-            "ErrorColor",
-            "&#128517"
-          );
+          const ErrorToast = new toastMessage("Error Login", "ErrorColor");
           ErrorToast.render();
         } else {
           return;
@@ -147,15 +142,12 @@ class toastMessage {
   constructor(...rest) {
     this.status = rest[0];
     this.statusColor = rest[1];
-    this.icon = rest[2];
   }
 
   render = () => {
     const toast = [
       `  
-  <div class="toast--icon">
-  <span>${this.icon}</span>
-  </div>
+  
   <div class="toast--text">
     <div class="toast--text_status ${this.statusColor}">${this.status}</div>
   </div>
