@@ -458,7 +458,7 @@ body {
 }
 /* ---------------------------------------------------------- */
 .load {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -475,6 +475,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 .load h1 {
   font-size: xxx-large;
@@ -704,6 +705,9 @@ body {
   font-weight: bold;
   font-size: 110%;
   margin: 5px 5px 0 5px;
+}
+.formBuy-sell {
+  display: none;
 }
 @keyframes load {
   0% {

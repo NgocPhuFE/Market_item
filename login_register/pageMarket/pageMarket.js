@@ -470,7 +470,7 @@ class HandelItemTab {
             const creditUser = Number($(".point").innerHTML);
             const priceItem = Number(result.price);
             const remainingPrice = creditUser - priceItem;
-            showFormBuy(
+            showFormBuySell(
               result.img,
               result.name,
               result.ratiry,
@@ -512,10 +512,15 @@ class HandelItemTab {
     });
   };
 }
-function showFormBuy(...arr) {
+function showFormBuySell(...arr) {
   const creditUser = Number($(".point").innerHTML);
   const priceItem = Number(arr[3]);
-  const remainingPrice = creditUser - priceItem;
+  let remainingPrice = 0;
+  if ($(".active-li").innerHTML === "Kho") {
+    remainingPrice = creditUser + priceItem;
+  } else if ($(".active-li").innerHTML === "Chợ") {
+    remainingPrice = creditUser - priceItem;
+  }
   const framesFormBuy = [
     `<form action="" class="${arr[2]}">
     <div class="NameForm">Vật Phẩm</div>
@@ -536,11 +541,11 @@ function showFormBuy(...arr) {
       <div class="formBuy-end">
         <div class="formBuy-creditUser">Số dư: <span>${creditUser}</span></div>
         <div class="formBuy-remaining">
-          Số dư sau thanh toán: <span>${creditUser}</span> - <span>${priceItem}</span> =
+          Số dư sau <span class="formBuySell">thanh toán</span> : <span>${creditUser}</span > <span class="calculation"></span> <span>${priceItem}</span> =
           <span class="remaining">${remainingPrice}</span>
         </div>
-
         <button class="formBuy-pay">Thanh toán</button>
+        <button class="formBuy-sell">Bán</button>
         <button class="formBuy-out">Tắt</button>
       </div>
     </div>
@@ -578,14 +583,52 @@ function showFormBuy(...arr) {
       return false;
     }
   };
+  $(".formBuy-sell").onclick = (e) => {
+    e.preventDefault();
+    $(".formBuy").innerHTML = "";
+    $(".formBuy").style.display = "none";
+    $(".point").innerHTML = "";
+    $(".point").innerHTML = remainingPrice;
+    let arrNewListItem = [];
+    let arrLastSell = [];
+    arrLastSell = listItemBuy.filter((e) => {
+      if (e.id === Number(arr[9])) {
+        arrNewListItem.push(e);
+        listItems.unshift(arrNewListItem[0]);
+      }
+      return e.id != Number(arr[9]);
+    });
+    if (arrLastSell.length === 0) {
+      arrLastSell = [];
+      listItemBuy = [];
+      const list = $(".listItem");
+      list.innerHTML = "";
+      return;
+    } else {
+      listItemBuy = arrLastSell;
+      renDer(listItemBuy);
+    }
+  };
+  if ($(".active-li").innerHTML === "Kho") {
+    $(".formBuy-pay").style.display = "none";
+    $(".formBuy-sell").style.display = "block";
+    $(".formBuySell").innerHTML = "bán";
+    $(".calculation").innerHTML = "+";
+  } else if ($(".active-li").innerHTML === "Chợ") {
+    $(".formBuySell").innerHTML = "thanh toán";
+    $(".calculation").innerHTML = "-";
+  }
 }
 function renDer(arr) {
   const list = $(".listItem");
   list.innerHTML = "";
   // src="/Market_item/login_register/pageMarket/${e.img}"
-  arr.forEach((e) => {
-    const framesItem = [
-      `
+  if (arr == "") {
+    list.innerHTML = "";
+  } else {
+    arr.forEach((e) => {
+      const framesItem = [
+        `
     <div class="img">
       <img
       src="../pageMarket/${e.img}"
@@ -601,69 +644,86 @@ function renDer(arr) {
  
     <div class="btnItem">
       <button class="buyItem" data-id = "${e.id}" data-info-st ="${e.info.st}" data-info-tdd ="${e.info.tdd}" data-info-heal ="${e.info.healling}" data-info-blood ="${e.info.blood}"  data-info-ratiry-buy="${e.info.ratiry}" data-img-buy = "${e.img}" data-name-buy = "${e.name}" data-ratiry-buy = "${e.ratiry}" data-price-buy ="${e.price}">Mua</button>
-      <button class="sellItem" data-id = "${e.id}" data-info-st ="${e.info.st}" data-info-tdd ="${e.info.tdd}" data-info-heal ="${e.info.healling}" data-info-blood ="${e.info.blood}"  data-info-ratiry-buy="${e.info.ratiry}" data-img-sell = "${e.img}" data-name-sell = "${e.name}" data-ratiry-sell = "${e.ratiry}" data-price-sell ="${e.price}">Bán</button>
+      <button class="sellItem" data-id = "${e.id}" data-info-st ="${e.info.st}" data-info-tdd ="${e.info.tdd}" data-info-heal ="${e.info.healling}" data-info-blood ="${e.info.blood}"  data-info-ratiry-sell="${e.info.ratiry}" data-img-sell = "${e.img}" data-name-sell = "${e.name}" data-ratiry-sell = "${e.ratiry}" data-price-sell ="${e.price}">Bán</button>
       <button class="addItem" data-id = "${e.id}" data-info-st ="${e.info.st}" data-info-tdd ="${e.info.tdd}" data-info-heal ="${e.info.healling}" data-info-blood ="${e.info.blood}" data-info-ratiry="${e.info.ratiry}" data-img = "${e.img}" data-name = "${e.name}" data-ratiry = "${e.ratiry}" data-price ="${e.price}">Thêm</button>
     </div>
     <div class="piceItem">Giá:<span id="priceItem">${e.price}</span></div>
     <div class="rankRatiry ${e.ratiry}">${e.info.ratiry}</div>
   
   `,
-    ].join("");
-    let divItem = document.createElement("div");
-    divItem.classList.add("item");
-    divItem.classList.add(`${e.ratiry}`);
-    divItem.innerHTML = framesItem;
-    list.appendChild(divItem);
-    $$(".addItem").forEach((e) => {
-      e.onclick = () => {
-        const addI = new HandelItemTab(
-          e.getAttribute("data-img"),
-          e.getAttribute("data-name"),
-          e.getAttribute("data-ratiry"),
-          e.getAttribute("data-price"),
-          e.getAttribute("data-info-ratiry"),
-          e.getAttribute("data-info-st"),
-          e.getAttribute("data-info-tdd"),
-          e.getAttribute("data-info-heal"),
-          e.getAttribute("data-info-blood"),
-          e.getAttribute("data-id")
-        );
-        addI.HandelAddItem();
-      };
-    });
-    $$(".buyItem").forEach((e) => {
-      e.onclick = () => {
-        showFormBuy(
-          e.getAttribute("data-img-buy"),
-          e.getAttribute("data-name-buy"),
-          e.getAttribute("data-ratiry-buy"),
-          e.getAttribute("data-price-buy"),
-          e.getAttribute("data-info-ratiry-buy"),
-          e.getAttribute("data-info-st"),
-          e.getAttribute("data-info-tdd"),
-          e.getAttribute("data-info-heal"),
-          e.getAttribute("data-info-blood"),
-          e.getAttribute("data-id")
-        );
-        $(".formBuy").style.display = "flex";
-      };
-    });
-    if ($(".active-li").innerHTML === "Kho") {
-      $$(".sellItem").forEach((e) => {
-        e.style.display = "flex";
-      });
+      ].join("");
+      let divItem = document.createElement("div");
+      divItem.classList.add("item");
+      divItem.classList.add(`${e.ratiry}`);
+      divItem.innerHTML = framesItem;
+      list.appendChild(divItem);
       $$(".addItem").forEach((e) => {
-        e.style.display = "none";
+        e.onclick = () => {
+          const addI = new HandelItemTab(
+            e.getAttribute("data-img"),
+            e.getAttribute("data-name"),
+            e.getAttribute("data-ratiry"),
+            e.getAttribute("data-price"),
+            e.getAttribute("data-info-ratiry"),
+            e.getAttribute("data-info-st"),
+            e.getAttribute("data-info-tdd"),
+            e.getAttribute("data-info-heal"),
+            e.getAttribute("data-info-blood"),
+            e.getAttribute("data-id")
+          );
+          addI.HandelAddItem();
+        };
       });
       $$(".buyItem").forEach((e) => {
-        e.style.display = "none";
+        e.onclick = () => {
+          showFormBuySell(
+            e.getAttribute("data-img-buy"),
+            e.getAttribute("data-name-buy"),
+            e.getAttribute("data-ratiry-buy"),
+            e.getAttribute("data-price-buy"),
+            e.getAttribute("data-info-ratiry-buy"),
+            e.getAttribute("data-info-st"),
+            e.getAttribute("data-info-tdd"),
+            e.getAttribute("data-info-heal"),
+            e.getAttribute("data-info-blood"),
+            e.getAttribute("data-id")
+          );
+          $(".formBuy").style.display = "flex";
+        };
       });
-    }
-  });
+      $$(".sellItem").forEach((e) => {
+        e.onclick = () => {
+          showFormBuySell(
+            e.getAttribute("data-img-sell"),
+            e.getAttribute("data-name-sell"),
+            e.getAttribute("data-ratiry-sell"),
+            e.getAttribute("data-price-sell"),
+            e.getAttribute("data-info-ratiry-sell"),
+            e.getAttribute("data-info-st"),
+            e.getAttribute("data-info-tdd"),
+            e.getAttribute("data-info-heal"),
+            e.getAttribute("data-info-blood"),
+            e.getAttribute("data-id")
+          );
+          $(".formBuy").style.display = "flex";
+        };
+      });
+      if ($(".active-li").innerHTML === "Kho") {
+        $$(".sellItem").forEach((e) => {
+          e.style.display = "flex";
+        });
+        $$(".addItem").forEach((e) => {
+          e.style.display = "none";
+        });
+        $$(".buyItem").forEach((e) => {
+          e.style.display = "none";
+        });
+      }
+    });
+  }
 }
 const btnSreach = $(".btnSreach");
 btnSreach.onclick = () => {
-  console.log();
   if ($(".active-li").innerHTML === "Chợ") {
     handleSreach(listItems);
   } else if ($(".active-li").innerHTML === "Kho") {
