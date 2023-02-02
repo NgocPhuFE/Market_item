@@ -799,15 +799,15 @@ function start() {
   handleMenu();
   formLoad();
   renDer(listItems);
-  onclick = () => {
-    if ($(".active-li").innerHTML === "Kho") {
-      $(".listItem").innerHTML = "";
-      renDer(listItemBuy);
-    } else if ($(".active-li").innerHTML === "Chợ") {
-      $(".listItem").innerHTML = "";
-      renDer(listItems);
-    }
-  };
+  // $("menuSreach").onclick = () => {
+  //   if ($(".active-li").innerHTML === "Kho") {
+  //     $(".listItem").innerHTML = "";
+  //     renDer(listItemBuy);
+  //   } else if ($(".active-li").innerHTML === "Chợ") {
+  //     $(".listItem").innerHTML = "";
+  //     renDer(listItems);
+  //   }
+  // };
 }
 // add item warehouse
 
