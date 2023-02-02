@@ -460,8 +460,6 @@ class HandelItemTab {
             const result = listItems.find((item) => {
               return item.id === Number($$(".itemTab")[i].classList[2]);
             });
-            console.log(result);
-
             const creditUser = Number($(".point").innerHTML);
             const priceItem = Number(result.price);
             const remainingPrice = creditUser - priceItem;
@@ -498,12 +496,7 @@ class HandelItemTab {
                 $(".point").innerHTML = remainingPrice;
               }
               // check item in arr if length arr < 1 handle
-              if ($$(".itemTab").length < 1) {
-                $(".defaulTab").style.display = "flex";
-              }
-              if ($$(".itemTab").length < 2) {
-                $(".btnTabMore").style.display = "none";
-              }
+              resetTabMore();
             };
           }
         }
@@ -566,6 +559,12 @@ function showFormBuy(...arr) {
       });
       listItems = resultListItem;
       renDer(listItems);
+      $$(".tabMore .itemTab").forEach((item) => {
+        if (item.classList[2] === arr[9]) {
+          item.remove();
+          resetTabMore();
+        }
+      });
     } else {
       return false;
     }
@@ -776,5 +775,14 @@ function start() {
   renDer(listItems);
 }
 start();
-
+function resetTabMore() {
+  if ($$(".itemTab").length < 1) {
+    $(".defaulTab").style.display = "flex";
+  }
+  if ($$(".itemTab").length < 2) {
+    $(".btnTabMore").style.display = "none";
+  }
+  $(".countBuy-item").innerHTML = "";
+  $(".countBuy-item").innerHTML = $$(".tabMore .itemTab").length;
+}
 // ---------- hover vao` gio hang xuat hien tab hang` hoa
