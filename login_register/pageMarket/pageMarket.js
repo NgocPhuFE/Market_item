@@ -275,7 +275,7 @@ let listItems = [
     },
   },
 ];
-
+let listItemBuy = [];
 function handleMenu() {
   const menuControl = $$(".menu-control li");
   menuControl.forEach((element) => {
@@ -485,6 +485,7 @@ class HandelItemTab {
                 // output sceen listArr new
                 const resultListItem = listItems.filter((event) => {
                   if (event.id == result.id) {
+                    listItemBuy.push(event);
                     return false;
                   }
                   return true;
@@ -553,6 +554,7 @@ function showFormBuy(...arr) {
       $(".point").innerHTML = remainingPrice;
       const resultListItem = listItems.filter((e) => {
         if (e.id == arr[9]) {
+          listItemBuy.push(e);
           return false;
         }
         return true;
@@ -592,6 +594,7 @@ function renDer(arr) {
  
     <div class="btnItem">
       <button class="buyItem" data-id = "${e.id}" data-info-st ="${e.info.st}" data-info-tdd ="${e.info.tdd}" data-info-heal ="${e.info.healling}" data-info-blood ="${e.info.blood}"  data-info-ratiry-buy="${e.info.ratiry}" data-img-buy = "${e.img}" data-name-buy = "${e.name}" data-ratiry-buy = "${e.ratiry}" data-price-buy ="${e.price}">Mua</button>
+      <button class="sellItem" data-id = "${e.id}" data-info-st ="${e.info.st}" data-info-tdd ="${e.info.tdd}" data-info-heal ="${e.info.healling}" data-info-blood ="${e.info.blood}"  data-info-ratiry-buy="${e.info.ratiry}" data-img-sell = "${e.img}" data-name-sell = "${e.name}" data-ratiry-sell = "${e.ratiry}" data-price-sell ="${e.price}">Bán</button>
       <button class="addItem" data-id = "${e.id}" data-info-st ="${e.info.st}" data-info-tdd ="${e.info.tdd}" data-info-heal ="${e.info.healling}" data-info-blood ="${e.info.blood}" data-info-ratiry="${e.info.ratiry}" data-img = "${e.img}" data-name = "${e.name}" data-ratiry = "${e.ratiry}" data-price ="${e.price}">Thêm</button>
     </div>
     <div class="piceItem">Giá:<span id="priceItem">${e.price}</span></div>
@@ -638,6 +641,17 @@ function renDer(arr) {
         $(".formBuy").style.display = "flex";
       };
     });
+    if ($(".active-li").innerHTML === "Kho") {
+      $$(".sellItem").forEach((e) => {
+        e.style.display = "flex";
+      });
+      $$(".addItem").forEach((e) => {
+        e.style.display = "none";
+      });
+      $$(".buyItem").forEach((e) => {
+        e.style.display = "none";
+      });
+    }
   });
 }
 const btnSreach = $(".btnSreach");
@@ -746,6 +760,7 @@ function payAllItemCart(data) {
         data.find((item) => {
           if (Number(e.classList[2]) === item.id) {
             result.push(item);
+            listItemBuy.push(item);
           }
         });
         e.remove();
@@ -769,12 +784,6 @@ function payAllItemCart(data) {
     }
   };
 }
-function start() {
-  handleMenu();
-  formLoad();
-  renDer(listItems);
-}
-start();
 function resetTabMore() {
   if ($$(".itemTab").length < 1) {
     $(".defaulTab").style.display = "flex";
@@ -785,4 +794,23 @@ function resetTabMore() {
   $(".countBuy-item").innerHTML = "";
   $(".countBuy-item").innerHTML = $$(".tabMore .itemTab").length;
 }
+
+function start() {
+  handleMenu();
+  formLoad();
+  renDer(listItems);
+  onclick = () => {
+    if ($(".active-li").innerHTML === "Kho") {
+      $(".listItem").innerHTML = "";
+      renDer(listItemBuy);
+    } else if ($(".active-li").innerHTML === "Chợ") {
+      $(".listItem").innerHTML = "";
+      renDer(listItems);
+    }
+  };
+}
+// add item warehouse
+
+start();
+
 // ---------- hover vao` gio hang xuat hien tab hang` hoa
