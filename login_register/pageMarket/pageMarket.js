@@ -298,6 +298,13 @@ function handleMenu() {
       }
       $("li.active-li").classList.remove("active-li");
       e.target.classList.add("active-li");
+      if (e.target.innerHTML === "Kho") {
+        $(".listItem").innerHTML = "";
+        renDer(listItemBuy);
+      } else if (e.target.innerHTML === "Chợ") {
+        $(".listItem").innerHTML = "";
+        renDer(listItems);
+      }
     };
   });
   // logout the user
@@ -656,7 +663,12 @@ function renDer(arr) {
 }
 const btnSreach = $(".btnSreach");
 btnSreach.onclick = () => {
-  handleSreach(listItems);
+  console.log();
+  if ($(".active-li").innerHTML === "Chợ") {
+    handleSreach(listItems);
+  } else if ($(".active-li").innerHTML === "Kho") {
+    handleSreach(listItemBuy);
+  }
 };
 function handleSreach(data) {
   const type = $('select[name="types"]');
@@ -687,7 +699,6 @@ function handleSreach(data) {
     return true;
   });
   renDer(resultItem);
-  console.log(data);
 }
 const payAll = $(".btnTabMore-buy");
 payAll.onclick = () => {
@@ -799,15 +810,6 @@ function start() {
   handleMenu();
   formLoad();
   renDer(listItems);
-  // $("menuSreach").onclick = () => {
-  //   if ($(".active-li").innerHTML === "Kho") {
-  //     $(".listItem").innerHTML = "";
-  //     renDer(listItemBuy);
-  //   } else if ($(".active-li").innerHTML === "Chợ") {
-  //     $(".listItem").innerHTML = "";
-  //     renDer(listItems);
-  //   }
-  // };
 }
 // add item warehouse
 
