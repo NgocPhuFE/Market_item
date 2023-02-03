@@ -435,17 +435,7 @@ class HandelItemTab {
         $$(".itemTab").forEach((e) => {
           if (e.classList[2] == ev.target.classList[1]) {
             e.remove();
-            $(".countBuy-item").innerHTML = "";
-            $(".countBuy-item").innerHTML = $$(".itemTab").length;
-            if ($$(".itemTab").length < 1) {
-              $(".defaulTab").style.display = "flex";
-            }
-            if ($$(".itemTab").length < 2) {
-              $(".btnTabMore").style.display = "none";
-            }
-            if ($$(".itemTab").length < 6) {
-              $(".tabMore").style.height = "max-content";
-            }
+            resetTabMore();
           }
         });
       };
@@ -454,10 +444,7 @@ class HandelItemTab {
       $$(".itemTab").forEach((e) => {
         e.remove();
       });
-      $(".btnTabMore").style.display = "none";
-      $(".defaulTab").style.display = "flex";
-      $(".countBuy-item").innerHTML = "";
-      $(".countBuy-item").innerHTML = $$(".itemTab").length;
+      resetTabMore();
     };
     // Check even click button Buy in cart
     $$(".itemInfo-btn-buy").forEach((ez) => {
@@ -726,8 +713,18 @@ const btnSreach = $(".btnSreach");
 btnSreach.onclick = () => {
   if ($(".active-li").innerHTML === "Chợ") {
     handleSreach(listItems);
+    if (screen.width <= 540) {
+      $(".menuSreach").style.display = "none";
+      $(".menuSreachReponsive .fa-solid").classList.remove("fa-xmark");
+      $(".menuSreachReponsive .fa-solid").classList.add("fa-magnifying-glass");
+    }
   } else if ($(".active-li").innerHTML === "Kho") {
     handleSreach(listItemBuy);
+    if (screen.width <= 540) {
+      $(".menuSreach").style.display = "none";
+      $(".menuSreachReponsive .fa-solid").classList.remove("fa-xmark");
+      $(".menuSreachReponsive .fa-solid").classList.add("fa-magnifying-glass");
+    }
   }
 };
 function handleSreach(data) {
@@ -758,6 +755,7 @@ function handleSreach(data) {
     }
     return true;
   });
+
   renDer(resultItem);
 }
 const payAll = $(".btnTabMore-buy");
@@ -862,6 +860,9 @@ function resetTabMore() {
   if ($$(".itemTab").length < 2) {
     $(".btnTabMore").style.display = "none";
   }
+  if ($$(".itemTab").length < 6) {
+    $(".tabMore").style.height = "max-content";
+  }
   $(".countBuy-item").innerHTML = "";
   $(".countBuy-item").innerHTML = $$(".tabMore .itemTab").length;
 }
@@ -870,9 +871,38 @@ function start() {
   handleMenu();
   formLoad();
   renDer(listItems);
+  $(".menuReponsive").onclick = () => {
+    handleResposiveMenu();
+  };
+  $(".menuSreachReponsive").onclick = () => {
+    handleResposiveMenuSreach();
+  };
 }
-// add item warehouse
 
+function handleResposiveMenu() {
+  if ($(".menuReponsive .fa-solid").classList.contains("fa-bars")) {
+    $(".menu").style.display = "block";
+    $(".menuReponsive .fa-solid").classList.add("fa-xmark");
+    $(".menuReponsive .fa-solid").classList.remove("fa-bars");
+  } else {
+    $(".menu").style.display = "none";
+    $(".menuReponsive .fa-solid").classList.remove("fa-xmark");
+    $(".menuReponsive .fa-solid").classList.add("fa-bars");
+  }
+}
+function handleResposiveMenuSreach() {
+  if (
+    $(".menuSreachReponsive .fa-solid").classList.contains(
+      "fa-magnifying-glass"
+    )
+  ) {
+    $(".menuSreach").style.display = "flex";
+    $(".menuSreachReponsive .fa-solid").classList.add("fa-xmark");
+    $(".menuSreachReponsive .fa-solid").classList.remove("fa-magnifying-glass");
+  } else {
+    $(".menuSreach").style.display = "none";
+    $(".menuSreachReponsive .fa-solid").classList.remove("fa-xmark");
+    $(".menuSreachReponsive .fa-solid").classList.add("fa-magnifying-glass");
+  }
+}
 start();
-
-// ---------- hover vao` gio hang xuat hien tab hang` hoa
