@@ -143,6 +143,9 @@
   .payAllItemCart-item-frames-pay-surplusLast {
     font-size: 80%;
   }
+  .piceItem {
+    top: 40%;
+  }
 }
 @media only screen and (max-width: 412px) {
   html {
