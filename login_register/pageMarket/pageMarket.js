@@ -847,9 +847,7 @@ function payAllItemCart(data) {
       renDer(listItems);
       listItem.innerHTML = "";
       $(".payAllItemCart").style.display = "none";
-      $(".btnTabMore").style.display = "none";
-      $(".countBuy-item").innerHTML = "0";
-      $(".defaulTab").style.display = "flex";
+      resetTabMore();
     }
   };
 }
